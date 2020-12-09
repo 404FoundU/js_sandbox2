@@ -1,0 +1,25 @@
+const anagram = (str1, str2) => {
+    if (str1.length !== str2.length) {
+        return false;
+    }
+    let freqCounter1 = [];
+    for (let value of str1) {
+        freqCounter1[value] = freqCounter1[value]? freqCounter1[value]+1 : 1;
+    }
+    for (let value of str2) {
+        if (!freqCounter1[value]) {
+            return false
+        }
+        else {
+            freqCounter1[value] -= 1;
+        }
+    }
+
+    return true;
+
+};
+console.log(anagram('unni', 'innu'));
+console.log(anagram('anagram', 'nagaram'));
+console.log(anagram('anagram', 'nagarem'));
+
+
