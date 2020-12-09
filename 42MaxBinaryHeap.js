@@ -1,81 +1,86 @@
-class maxVinaryHeap {
+class MaxBinaryHeap {
     constructor() {
-        this.values = [55,39,41,18,27,12,33];
+        this.values = [55, 39, 41, 18, 27, 12, 33];
     }
 
-    insert(value) {
-        this.values.push(value);
+    insert(element) {
+        this.values.push(element);
         this.bubbleUp();
     }
 
     bubbleUp() {
-        let idx = this.values.length - 1;
-        const element = this.values[idx];
-        while (idx > 0) {
-            let parentIdx = Math.floor((idx - 1) / 2);
-            let parent = this.values[parentIdx];
+        let index = this.values.length - 1;
+        let element = this.values[index];
+        while (index > 0) {
+            let parentIndex = Math.floor((index - 1) / 2);
+            let parent = this.values[parentIndex];
             if (element <= parent) {
-                break
+                break;
             }
-            this.values[parentIdx] = element;
-            this.values[idx] = parent;
-            idx = parentIdx;
+            this.values[parentIndex] = element;
+            this.values[index] = parent;
+            index = parentIndex;
         }
     }
 
-    extractmax() {
-        this.swap( 0, this.values.length - 1);
-        let oldRoot = this.values.pop();
-        let i = 0;
-        while(i< this.values.length) {
-            let leftIndex = 2 * i + 1;
-            let rightIndex = 2 * i + 2;
-            let leftChild = this.values[leftIndex];
-            let rightChild = this.values[rightIndex];
-            if (rightChild === undefined && leftChild === undefined) {
-                break;
+    extractMax() {
+        let index = this.values.length - 1;
+        let element = this.values[index];
+        let extractElement = this.values[0];
+        this.values[0] = element;
+        this.values[index] = extractElement;
+        extractElement = this.values.pop();
+        let parentIndex = 0;
+        let length = this.values.length;
+
+        while (true) {
+            let parent = this.values[parentIndex];
+            let leftChildIndex = 2 * parentIndex + 1;
+            let rightChildIndex = 2 * parentIndex + 2;
+            let leftChild = 0;
+            let rightChild = 0;
+            if (leftChildIndex < length) {
+                leftChild = this.values[leftChildIndex];
+            } if (rightChildIndex < length) {
+                rightChild = this.values[rightChildIndex];
             }
-            else if (rightChild === undefined && leftChild !== undefined) {
-                if (this.values[i] < leftChild) {
-                    this.swap(leftIndex, i);
-                    i = leftIndex;
-                    continue;
-                }
-                break;
+
+            let swapped = false;
+            if (parent < leftChild && leftChild > rightChild) {
+                this.values[leftChildIndex] = parent;
+                this.values[parentIndex] = leftChild;
+                parentIndex = leftChildIndex;
+                swapped = true;
+            } if (parent < rightChild && rightChild > leftChild  ) {
+                this.values[rightChildIndex] = parent;
+                this.values[parentIndex] = rightChild;
+                parentIndex = rightChildIndex;
+                swapped = true
             }
-            else if (leftChild === undefined && rightChild !== undefined) {
-                if (this.values[i] < rightChild) {
-                    this.swap( rightIndex, i);
-                    i = rightIndex;
-                    continue;
-                }
-                break;
-            }
-            else if (rightChild > leftChild ) {
-                if (this.values[i] < rightChild) {
-                    this.swap( rightIndex, i);
-                    i = rightIndex;
-                }
-            }
-            else if (rightChild < leftChild ) {
-                if (this.values[i] < leftChild) {
-                    this.swap(leftIndex, i);
-                    i = leftIndex;
-                }
-            }
-            else {
+            if (swapped === false) {
                 break;
             }
 
         }
-        return oldRoot;
-    }
-    swap( idx1, idx2) {
-        [this.values[idx1], this.values[idx2]] = [this.values[idx2], this.values[idx1]];
+
+        return extractElement;
+
     }
 
-
+    printHeap() {
+        console.log(this.values);
+    }
 }
 
-let heap = new maxVinaryHeap();
-console.log(heap.extractmax());
+// 41,39,33,18,27,12
+const heap = new MaxBinaryHeap();
+// heap.insert(55);
+heap.extractMax();
+// list.find(3);
+// list.remove(1);
+// console.log(list.BFS());
+// console.log(list.DFSInOrder());
+// list.printList();
+// console.log(heap.values);
+
+heap.printHeap();
