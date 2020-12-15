@@ -26,4 +26,23 @@ class Graph {
         }
         delete this.adjacencyList[v1];
     }
+
+    DFSRecursive(start) {
+        const result = [];
+        const visited = {};
+        const adjacencyList = this.adjacencyList;
+        const dfs = (vertex) => {
+            if (!vertex) {
+                return null;
+            }
+            visited[vertex] = true;
+            result.push(vertex);
+            adjacencyList.forEach(neighbour => {
+                if (!visited) {
+                    return dfs(neighbour);
+                }
+            });
+            dfs(start);
+        };
+    }
 }
