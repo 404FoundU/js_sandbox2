@@ -18,35 +18,31 @@
  * @Idea2
  * Memoization
  *
- * @Time m*n
+ * @Time n*m*m
  * @Space m
- * @return boolean
+ * @return null|array
  */
 
-const canSum = (targetSum, numbers, memo = {}) => {
-
+const howSum = (targetSum, numbers, memo = {}) => {
     const key = targetSum;
     if (key in memo) {
         return memo[key];
     }
-
     if (targetSum === 0) {
-        return true;
+        return [];
     }
     if (targetSum < 0) {
-        return false;
+        return null;
     }
     for (let num of numbers) {
         const remainder = targetSum - num;
-        const remainderResult = canSum(remainder, numbers, memo);
-
-
-        if (remainderResult === true) {
-            memo[key] = true;
-            return memo[key];
+        const remainderResult = howSum(remainder, numbers, memo);
+        if (remainderResult !== null) {
+            memo[key] = [...remainderResult, num];
+            return  memo[key];
         }
     }
-    memo[key] = false;
+    memo[key] = null;
     return memo[key];
 };
 /**
@@ -55,7 +51,7 @@ const canSum = (targetSum, numbers, memo = {}) => {
  * Sum is 0
  *
  */
-console.log(canSum(7, [2,3]));
-console.log(canSum(7, [5,3,4,7]));
-console.log(canSum(8, [2,3,5]));
-console.log(canSum(300, [7,14]));
+console.log(howSum(7, [2,3]));
+console.log(howSum(7, [5,3,4,7]));
+console.log(howSum(8, [2,3,5]));
+console.log(howSum(300, [7,14]));
