@@ -18,7 +18,7 @@
  * @Idea2
  * Memoization
  *
- * @Time n*m*m
+ * @Time n^m
  * @Space m
  * @return array
  */
