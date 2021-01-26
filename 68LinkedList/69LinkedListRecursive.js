@@ -12,9 +12,8 @@ class LinkedList {
     }
 
     pushTo(val) {
-        let node = new Node(val);
         if (this.head === null) {
-            this.head = node;
+            this.head = new Node(val);
             return;
 
         }
@@ -23,10 +22,9 @@ class LinkedList {
     }
 
     _pushTo(val, current) {
-        let node = new Node(val);
         //check if tail
         if (current.next === null) {
-            current.next = node;
+            current.next = new Node(val);;
             return;
         }
         this._pushTo(val, current.next);

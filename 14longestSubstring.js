@@ -13,6 +13,7 @@ const longestSubstring = (str) => {
     }
     return longest;
 };
+
 console.log(longestSubstring(''));
 console.log(longestSubstring('rithmschool'));
 console.log(longestSubstring('aaaaaa'));

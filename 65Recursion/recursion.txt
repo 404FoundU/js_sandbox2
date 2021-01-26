@@ -1,0 +1,31 @@
+// Different approaches
+
+1. return n*recursive(n-1)
+2. Tail call optimization - return recursive(n-1, accumulator + n )
+    recursive(n, accumulator = 0){
+    if(n===1){
+    return accumulator;
+    }
+    return recursive(n-1, number * accumulator )
+    Reduces the stack frame since the function is returned
+
+    const capitalizeFirst = (arr, newArr = []) => {
+           if (arr.length === 0) {
+               return  newArr;
+           }
+           else{
+               let firstWord = arr[0][0].toUpperCase();
+               let rest = arr[0].slice(1);
+               newArr.push(firstWord.concat(rest));
+           }
+           return capitalizeFirst(arr.slice(1), newArr);
+
+3. obj.foreach( el => recursive(el) // nested obj 
+4. recursive(str.slice(1)) + str[0]) // string reverse
+5. Array of strings ( longest )
+    if( str[0].length > str[1].length)
+    recursive(str.splice(1,1)
+
+
+
+
