@@ -36,26 +36,6 @@ class BST {
         }
     }
 
-    print() {
-        if (this.root !== null) {
-            let current = this.root;
-            this._print(current);
-        }
-    }
-
-    _print(current) {
-        while (current !== null) {
-            console.log(current.val);
-            if (current.left !== null) {
-                current = current.left;
-                this._print(current);
-            }
-            if (current.right !== null) {
-                current = current.right;
-                this._print(current);
-            }
-        }
-    }
 
     find(val) {
         if (this.root === null) {
@@ -97,6 +77,21 @@ class BST {
         }
         console.log(data);
     }
+
+    DfsPreorder() {
+        let data = [];
+        const traverse = (node) => {
+            data.push(node.value);
+            if (node.left !== null) {
+                traverse(node.left);
+            }  if (node.right !== null) {
+                traverse(node.right);
+            }
+
+        };
+        traverse(this.root);
+        return data;
+    }
 }
 
 const bst = new BST();
@@ -105,7 +100,7 @@ bst.insert(3);
 bst.insert(8);
 bst.insert(7);
 bst.insert(1);
-bst.find(1);
-bst.BFS();
+// bst.BFS();
+bst.DfsPreorder();
 // bst.print();
 
