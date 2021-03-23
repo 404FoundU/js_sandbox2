@@ -73,7 +73,29 @@ class BST {
                 }
             }
         }
+    }
 
+    BFS() {
+        let data = [];
+        let queue = [];
+        if (this.root === null) {
+            return [];
+        } else {
+            queue.push(this.root);
+            while (queue.length !== 0) {
+                let current = queue.shift();
+                data.push(current.val);
+                if (current.left !== null) {
+                    queue.push(current.left);
+                }
+                if (current.right !== null) {
+                    queue.push(current.right);
+                }
+            }
+
+
+        }
+        console.log(data);
     }
 }
 
@@ -84,5 +106,6 @@ bst.insert(8);
 bst.insert(7);
 bst.insert(1);
 bst.find(1);
+bst.BFS();
 // bst.print();
 
