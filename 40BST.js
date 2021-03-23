@@ -1,3 +1,5 @@
+//n log n
+
 class Node {
     constructor(value) {
         this.value = value;
@@ -57,5 +59,10 @@ class BST {
 
 }
 
-let tree = new BST();
-tree.insert(10);
+let bst = new BST();
+bst.insert(5);
+bst.insert(3);
+bst.insert(8);
+bst.insert(7);
+bst.insert(1);
+bst.print();
