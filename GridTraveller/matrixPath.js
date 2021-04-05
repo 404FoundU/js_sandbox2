@@ -1,95 +1,57 @@
-const matrixPath = (strArr) => {
-    let m = strArr.map(el => el
-        .split('')
-    );
-    let current = m[0][0];
-    let bottom = strArr.length - 1;
-    let right = m[0].length-1;
-    let last = m[bottom][right];
-    let top = 0;
-    let left=0;
-    let count = 0;
-    let count2 = 0;
-    let current1 = 0;
-    let current2 = 0;
-    let i = 0;
-    let j=0;
-    let k=0;
-    let l = 0;
-    while (i<m.length) {
-        while (j<m[0].length) {
-            if (count > 1) {
-                return 'not possible';
+function matrixPath(strArr) { // 0 = up, 1 = down, 2 = left, 3 = right
+    let count = [], visited = [];
+    for (var i=0; i<strArr.length; i++) {
+        for (var j=0; j<strArr[i].length; j++) {
+            var row = strArr[i];
+            if ((row[j - 1] === "1" || row[j + 1] === "1") && row[j] === "0") {
+                strArr[i] = row.substr(0, j) + "2" + row.substr(j + 1);
             }
-            if (m[i][j] === '1') {
-                current1 = i;
-                current2 = j;
-            } else if (count===0) {
-                m[i][j] = "1";
-                count++;
-            }
-            else{
-                i++;
-                j--;
-            }
-
-            j++;
-
         }
-        i++;
-        j--;
-
     }
-    console.log(i-1,j);
-    while (k<m.length) {
-        while (l<m[0].length) {
-            if (count2 > 1) {
-                return 'not possible';
-            }
-            if (m[k][l] === '1') {
-                current1 = k;
-                current2 = l;
-            } else if (count2===0) {
-                m[k][l] = "1";
-                count2++;
-            }
-            else{
-                k++;
-                l--;
-            }
+    findPath(strArr, 0, 0, -1, count, visited);
+    if (count.length === 0) {
+        return "not possible";
+    } else if (count.indexOf(-1) !== -1) {
+        return "true";
+    } else {
+        return count.length;
+    }
+}
 
-            l++;
-
+function findPath(arr, i, j, changed, count, visited) {
+    if (arr[i][j] === "0") {
+        return;
+    }
+    if (arr[i][j] === "2") {
+        if (changed !== -1) {
+            return;
+        } else {
+            changed = i + "," + j;
         }
-        i++;
-        j--;
-
     }
+    if (i === arr.length - 1 && j === arr[i].length - 1) {
+        if (count.indexOf(changed) === -1) {
+            return count.push(changed);
+        }
+    }
+    if (visited[i + "," + j] === changed) {
+        return;
+    } else {
+        visited[i + "," + j] = changed;
+    }
+    if (i !== 0) {
+        findPath(arr, i - 1, j, changed, count, visited);
+    }
+    if (i !== arr.length - 1) {
+        findPath(arr, i + 1, j, changed, count, visited);
+    }
+    if (j !== 0) {
+        findPath(arr, i, j - 1, changed, count, visited)
+    }
+    if (j !== arr[i].length - 1) {
+        findPath(arr, i, j + 1, changed, count, visited);
+    }
+}
 
-    /* while (current1 !== m[0].length-1 && current2 !== strArr.length - 1) {
-         /!*for (let i = top; i <= right; i++) {
-             if (m[top][i] === "1") {
-                 current1 = top;
-                 current2 = i;
-                 current = m[current1][current2];
-                 continue;
-             }
 
-
-         }*!/
-         for (let i = 0; i < m[0].length ; i++) {
-             for (let j = 0; j < m.length; j++) {
-                 console.log(m[i][j]);
-             }
-         }
-         /!*top++;
-         for (let j = top; j <= bottom; j++) {
-             if (m[]) {
-             }
-         }*!/
-
-         break;
-     }*/
-    // console.log(current1, current2);
-};
 matrixPath(["11100", "10011", "10101", "10011"]);
