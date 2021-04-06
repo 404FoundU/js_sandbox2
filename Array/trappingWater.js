@@ -1,42 +1,22 @@
+//https://www.youtube.com/watch?v=fTD6Se3ZtEo
+
 const trappingWater = (arr) => {
     let length = arr.length;
-    let area = 1;
-    let waterHeight = [arr[0]];
-    let h1, h2;
-    for (let i = 0; i < length-1; i++) {
-        if (typeof waterHeight[i] === 'undefined') {
-            h1 = arr[i];
-        } else {
-            h1 = waterHeight[i];
-        }
-
-            h2 = arr[i + 1];
-
-        waterHeight.push(Math.max(h1, h2));
+    let totalWater = 0;
+    let rightMax;
+    let leftMax = [arr[0]];
+    for (let i = 0; i < length; i++) {
+        leftMax[i] = Math.max(arr[i], leftMax[i - 1]);
 
     }
-    arr.reverse();
-    let waterHeight2 = [arr[0]];
-    for (let i = 0; i < length-1; i++) {
-        if (typeof waterHeight2[i] === 'undefined') {
-            h1 = arr[i];
-        } else {
-            h1 = waterHeight2[i];
-        }
-
-        h2 = arr[i + 1];
-
-        waterHeight2.push(Math.max(h1, h2));
+    rightMax[length-1] = arr[length - 1];
+    for (let i = length-2; i >=0; i--) {
+        rightMax[i] = Math.max(arr[i], rightMax[i + 1]);
 
     }
-    waterHeight2.reverse();
-    arr.reverse();
-    for (let i = 0; i < length-1; i++) {
-        let minHeight = Math.min(waterHeight2[i], waterHeight[i]) - arr[i];
-        area = area + minHeight;
-
+    for (let i = 1; i < length - 1; i++) {
+        totalWater += Math.min(leftMax[i], rightMax[i]) - arr[i];
     }
-    return area;
 };
 console.log(trappingWater([0, 2, 4, 0, 2, 1, 2, 6]));
 // console.log(trappingWater([3, 0, 0, 2, 0, 4]));
