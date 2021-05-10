@@ -24,6 +24,31 @@ const addEdge = (origin, dest) => {
 airports.forEach(addNode);
 
 routes.forEach(route => addEdge(...route));
-console.log(adjacencyList);
+// console.log(adjacencyList);
+
+// graph search bfs. find if there a way to destination
+
+const bfs = (start, end) => {
+    const queue = [start];
+    const visited = new Set();
+    while (queue.length) {
+        const airport = queue.shift();
+        const destinations = adjacencyList.get(airport);
+        for (let destination of destinations) {
+            if (destination === end) {
+                console.log("Found it");
+            }
+            if (!visited.has(destination)) {
+                visited.add(destination);
+                queue.push(destination);
+                console.log(destination);
+            }
+        }
+
+    }
+}
+bfs('LAX', 'MEX');
+
+// find the route as quickly as possible
 
 
