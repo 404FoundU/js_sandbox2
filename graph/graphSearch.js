@@ -1,3 +1,5 @@
+//https://fireship.io/courses/javascript/interview-graphs/
+
 const airports = 'PHX BKK OKC JFK LAX MEX EZE HEL LOS LAP LIM'.split(' ');
 const routes = [
     ['PHX', 'LAX'],
@@ -47,8 +49,22 @@ const bfs = (start, end) => {
 
     }
 }
-bfs('LAX', 'MEX');
+// bfs('LAX', 'MEX');
 
 // find the route as quickly as possible
+const dfs = (start, visited = new Set()) => {
+    visited.add(start);
+    const destinations = adjacencyList.get(start);
+    for (let destination of destinations) {
+        if (destination === 'BKK') {
+            console.log('Found it');
+            return;
+        }
+        if (!visited.has(destination)) {
+            dfs(destination, visited);
+        }
+    }
 
+}
+dfs('PHX')
 
