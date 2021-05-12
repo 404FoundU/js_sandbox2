@@ -28,15 +28,30 @@ const bfs = (adjMatrix, start) => {
                 visited.add(i);
                 queue.push(i);
             }
-
         }
     }
-
 }
+// bfs(adjMatrix, 0);
+const dfs = (start) => {
+    const stack = [start];
+    const visited = new Set();
+    // visited.add(start);
+    while (stack.length) {
+        let current = stack.pop();
+        let destinations = adjMatrix[current];
+        for (let i = 0; i < destinations.length; i++) {
+            if (!visited.has(i) && destinations[i] === 1 ) {
+                visited.add(i);
+                stack.push(i);
+            }
+        }
 
-bfs(adjMatrix, 0);
 
-const dfs = (adjMatrix, start, visited = new Set()) => {
+    }
+}
+dfs(0);
+
+const dfsRecursive = (adjMatrix, start, visited = new Set()) => {
     visited.add(start);
     console.log(start);
     let destinations = adjMatrix[start];
@@ -47,9 +62,11 @@ const dfs = (adjMatrix, start, visited = new Set()) => {
                 return;
             }
             if (!visited.has(i)) {
-                dfs(adjMatrix, i, visited);
+                dfsRecursive(adjMatrix, i, visited);
             }
         }
     }
 };
-// dfs(adjMatrix, 0);
+
+
+// dfsRecursive(adjMatrix, 0);

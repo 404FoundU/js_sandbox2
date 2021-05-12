@@ -16,8 +16,9 @@ const transitivityRelation = () => {
     for (let airport of airports) {
         for (let destination of destinations) {
             if (airport !== destination) {
-                let routeExist = checkRouteExistDfs(airport, destination);
+                // let routeExist = checkRouteExistDfs(airport, destination);
                 // let routeExist = checkRouteExistBfs(airport, destination);
+                let routeExist = dfsNormal(airport, destination);
                 if (routeExist === true) {
                     if (isDirectRoute(airport, destination) === false) {
                         pairs.push([airport, destination]);
@@ -77,5 +78,47 @@ const isDirectRoute = (start, end) => {
     }
     return false;
 }
+const dfsNormal = (start, end) => {
+    const stack = [start];
+    const visited = new Set();
+    // visited.add(start);
+    while (stack.length) {
+        let current = stack.pop();
+        let destinations = adjMatrix[current];
+        for (let i = 0; i < destinations.length; i++) {
+            if (destinations[i] === 1 && i===end) {
+                return true;
+            }
+            if (!visited.has(i) && destinations[i] === 1 ) {
+                visited.add(i);
+                stack.push(i);
+            }
+        }
+
+
+    }
+    return false
+}
+/*
+const checkRouteExistDfsOld = ( start, end, visited = new Set()) => {
+
+    visited.add(start);
+    // console.log(start);
+
+    let destinations = adjMatrix[start];
+    for (let i = 0; i < destinations.length; i++) {
+
+        if (i===end  && destinations[i] ===1) {
+            console.log("found ", end);
+            return true;
+        }
+        if (!visited.has(i)  && destinations[i] ===1 ) {
+            checkRouteExistDfsOld( i, end , visited);
+        }
+        return false;
+
+    }
+    // return false;
+};*/
 console.log(transitivityRelation());
 ;
