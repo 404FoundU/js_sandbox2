@@ -14,6 +14,7 @@ const adjMatrix = [
 const bfs = (adjMatrix, start) => {
     const queue = [start];
     const visited = new Set();
+    visited.add(start);
     while (queue.length) {
         let current = queue.shift();
         console.log(current);
@@ -33,7 +34,7 @@ const bfs = (adjMatrix, start) => {
 
 }
 
-// bfs(adjMatrix, 0);
+bfs(adjMatrix, 0);
 const dfs = (adjMatrix, start, visited = new Set()) => {
     visited.add(start);
     console.log(start);
@@ -50,4 +51,4 @@ const dfs = (adjMatrix, start, visited = new Set()) => {
         }
     }
 };
-dfs(adjMatrix, 0);
+// dfs(adjMatrix, 0);

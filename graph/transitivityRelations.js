@@ -11,7 +11,8 @@ const transitivityRelation = () => {
     for (let airport of airports) {
         for (let destination of destinations) {
             if (airport !== destination) {
-                let routeExist = checkRouteExist(airport, destination);
+                // let routeExist = checkRouteExistDfs(airport, destination);
+                let routeExist = checkRouteExistBfs(airport, destination);
                 if (routeExist === true) {
                     if (isDirectRoute(airport, destination) === false) {
                         pairs.push([airport, destination]);
@@ -25,7 +26,30 @@ const transitivityRelation = () => {
     }
     return pairs;
 }
-const checkRouteExist = (start, end, visited = new Set()) => {
+
+const checkRouteExistBfs = ( start, end) => {
+    const queue = [start];
+    const visited = new Set();
+    visited.add(start);
+    while (queue.length) {
+        let current = queue.shift();
+        let destinations = adjMatrix[current];
+        for (let i = 0; i < destinations.length; i++) {
+            //find OKC airport
+            if (destinations[i] === 1 && i===end) {
+                return true;
+            }
+            if (!visited.has(i) && destinations[i] === 1 ) {
+                visited.add(i);
+                queue.push(i);
+            }
+
+        }
+    }
+    return false;
+
+}
+const checkRouteExistDfs = (start, end, visited = new Set()) => {
     if (visited.has(start)) {
         return false;
     }
