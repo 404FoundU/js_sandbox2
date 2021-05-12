@@ -1,8 +1,13 @@
 // https://coderbyte.com/editor/Transitivity%20Relations:JavaScript
-const adjMatrix = [
+/*const adjMatrix = [
     [1, 1, 1],
     [1, 0, 0],
     [0, 1, 0]
+]*/const adjMatrix = [
+    [0, 1, 0,0],
+    [0, 0, 1,0],
+    [0, 0,1,1],
+    [0, 0, 0,1],
 ]
 const transitivityRelation = () => {
     let airports = Array.from(Array(adjMatrix.length).keys());
@@ -11,8 +16,8 @@ const transitivityRelation = () => {
     for (let airport of airports) {
         for (let destination of destinations) {
             if (airport !== destination) {
-                // let routeExist = checkRouteExistDfs(airport, destination);
-                let routeExist = checkRouteExistBfs(airport, destination);
+                let routeExist = checkRouteExistDfs(airport, destination);
+                // let routeExist = checkRouteExistBfs(airport, destination);
                 if (routeExist === true) {
                     if (isDirectRoute(airport, destination) === false) {
                         pairs.push([airport, destination]);
@@ -60,7 +65,7 @@ const checkRouteExistDfs = (start, end, visited = new Set()) => {
     // console.log(start);
     let destinations = adjMatrix[start];
     for (let i = 0; i < destinations.length; i++) {
-        if (checkRouteExist(i, end, visited)) {
+        if (checkRouteExistDfs(i, end, visited) && destinations[i] ===1) {
             return true;
         }
     }

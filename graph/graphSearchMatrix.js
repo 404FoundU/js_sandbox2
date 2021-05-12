@@ -35,6 +35,7 @@ const bfs = (adjMatrix, start) => {
 }
 
 bfs(adjMatrix, 0);
+
 const dfs = (adjMatrix, start, visited = new Set()) => {
     visited.add(start);
     console.log(start);
