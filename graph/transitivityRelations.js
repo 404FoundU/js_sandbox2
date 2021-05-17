@@ -1,14 +1,17 @@
 // https://coderbyte.com/editor/Transitivity%20Relations:JavaScript
-/*const adjMatrix = [
+const adjMatrix = [
     [1, 1, 1],
-    [1, 0, 0],
-    [0, 1, 0]
-]*/const adjMatrix = [
+    [0, 1, 1],
+    [0, 0, 1]
+]
+/*
+const adjMatrix = [
     [0, 1, 0,0],
     [0, 0, 1,0],
     [0, 0,1,1],
     [0, 0, 0,1],
 ]
+*/
 const transitivityRelation = () => {
     let airports = Array.from(Array(adjMatrix.length).keys());
     let destinations = [...airports];
