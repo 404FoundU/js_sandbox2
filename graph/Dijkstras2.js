@@ -78,7 +78,7 @@ const dijkstra = (start, end) => {
             // loop over neighbours
             let destinations = adjacencyList.get(airport);
             for (let destination of destinations) {
-                  // calculate new dist to neighbour port
+                  // calculate linkedLIstTDD dist to neighbour port
 
                 console.log(`Airport ${destination.port} is ${destination.distance} from ${airport}`);
                 console.log(`Shortest distance from Airport ${airport} to A is  ${distances[airport]} `);

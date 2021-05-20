@@ -100,12 +100,12 @@ class WeightedGraph {
                     // console.log(nextNode);
                     // break;
                     /**
-                     * calculate new distance to neighbouring nodes
+                     * calculate linkedLIstTDD distance to neighbouring nodes
                      */
                     let candidate = distances[smallest] + nextNode.weight;
                     let nextNeighbour = nextNode.node;
                     if (candidate < distances[nextNeighbour]) {
-                        // updating new smallest distance to neighbour
+                        // updating linkedLIstTDD smallest distance to neighbour
                         distances[nextNeighbour] = candidate;
                         //update previous
                         previous[nextNeighbour] = smallest;

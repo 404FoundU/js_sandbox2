@@ -103,7 +103,7 @@ console.log(kClosest( [[1,3],[-2,2]], 1));;
 
 
 /*
-let pQ = new PriorityQueue();
+let pQ = linkedLIstTDD PriorityQueue();
 pQ.enqueue(39,3);
 pQ.enqueue(18, 4);
 pQ.enqueue(55, 1);
