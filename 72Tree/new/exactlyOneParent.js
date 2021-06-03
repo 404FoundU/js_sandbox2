@@ -13,27 +13,26 @@ const parentChild = [
 ]
 
 const parentChildFinder = (parentChild) => {
-    let childMap = {};
-    for (let i = 0; i < parentChild.length; i++) {
-        let parent = parentChild[i][0];
-        let child = parentChild[i][1];
-        if (child in childMap) {
-            let parents = childMap[child]
-            parents.push(parent);
-            childMap[child] = parents;
-            // childMap.child.push(parent);
-        }
-        else{
-
-            childMap[child] = [parent];
-        }
-
+    let childMap = new Map();
+    const singleParent = [];
+    const noParent = [];
+    for (let i = 1; i <= 11; i++) {
+        childMap.set(i, []);
     }
-    for (const child in childMap) {
-        let parents = childMap[child];
-        if (       parents.length ===1) {
-            console.log(child);
+    for (let j = 0; j < parentChild.length; j++) {
+        let parent = parentChild[j][0];
+        let child = parentChild[j][1];
+
+        childMap.get(child).push(parent);
+    }
+    for (let [key, value] of childMap) {
+        if (value.length === 0) {
+            noParent.push(key);
+        }if (value.length === 1) {
+            singleParent.push(key);
         }
     }
+    console.log(noParent);
+    console.log(singleParent);
 }
 parentChildFinder(parentChild);
