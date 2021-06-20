@@ -17,5 +17,4 @@ function sockMerchantMap(n, ar) {
     }
     return newArr.length;
 }
-
 console.log(sockMerchantMap(9, [10, 20, 20, 10, 10, 30, 50, 10, 20]));
