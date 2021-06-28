@@ -11,7 +11,6 @@ const pivotHelper = (arr, start, end=arr.length+1) =>{
             swapIndex++;
             //swap current element to pivot index
             swap(arr, i, swapIndex);
-
         }
 
     }
