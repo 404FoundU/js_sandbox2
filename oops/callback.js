@@ -26,15 +26,15 @@ const button = document.querySelector('button')
     button.addEventListener('click', toggle(param));
     */
 
-const firstAction = () => {
+const firstAction = (secondAction) => {
     console.log('I am first');
     setTimeout(secondAction, 2000);
 
 }
-const secondAction = () => {
-    console.log('I am second');
+const secondAction = (message) => {
+    console.log(message);
 }
 
-setTimeout(firstAction, 5000);
+setTimeout(()=>firstAction(()=>secondAction('second')), 5000);
 
 
