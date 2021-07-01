@@ -38,3 +38,6 @@ const secondAction = (message) => {
 setTimeout(()=>firstAction(()=>secondAction('second')), 5000);
 
 
+setTimeout(()=>firstAction((message='second') => {
+    console.log(message);
+}), 5000);
