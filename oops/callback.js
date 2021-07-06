@@ -5,7 +5,7 @@ const button = document.querySelector('button')
 /**
  * toggle is only called on button click
  * toggle === () => {}
- * toggle(param) === (param)=>{}
+ * toggle(param) === (param)=>{} or ()=>toggle(param)
  */
     /*
     function toggle() {
