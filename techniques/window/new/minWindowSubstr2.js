@@ -3,6 +3,37 @@
  * @return {string}
  */
 function MinWindowSubstring(s, t) {
+    let map = {};
+    let final = s.slice(0);
+    for (let i = 0; i < t.length; i++) {
+        let char = t.charAt(i);
+        map[char] = (map[char] || 0) + 1
+    }
+    for (let i = 0; i < s.length; i++) {
+        for (let j = i + t.length; j <= s.length; j++) {
+            let count = t.length;
+            let str = s.slice(i, j);
+            let charMap = {...map}
+            for (let k = 0; k < str.length; k++) {
+                let char = str.charAt(k);
+                if (char in charMap) {
+                    if (charMap[char] > 0) {
+                        count--;
+                        charMap[char] = charMap[char] - 1
+                    }
+                }
+            }
+            if (count === 0) {
+                if (str.length < final.length) {
+                    final = str.slice(0);
+                }
+            }
+        }
+    }
+    return final;
+}
+
+/*function MinWindowSubstring(s, t) {
     let minLength = Infinity;
     let count = t.length;
     let l = 0, r = 0;
@@ -18,13 +49,13 @@ function MinWindowSubstring(s, t) {
         }
         map[charR] = map[charR] - 1;
         r++
-        /**
+        /!**
          * if count is 0 then increase l
-         */
+         *!/
         while (count === 0) {
-            /**
+            /!**
              * minlength
-             */
+             *!/
             if ((r - l ) < minLength) {
                 minLength = r - l ;
                 start=l
@@ -41,8 +72,8 @@ function MinWindowSubstring(s, t) {
         }
     }
     return minLength === Infinity ? "":s.substr(start, minLength)
-}
-
+}*/
 // keep this function call here
-console.log(MinWindowSubstring("krishnan", "ash"));//shna
-console.log(MinWindowSubstring("ahffaksfajeeubsne", "jefaa"));//
+// console.log(MinWindowSubstring("krishnan", "ash"));//shna
+// console.log(MinWindowSubstring("ahffaksfajeeubsne", "jefaa"));//
+console.log(MinWindowSubstring("adobebanc", "abc"));//
