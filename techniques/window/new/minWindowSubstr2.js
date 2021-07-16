@@ -1,8 +1,9 @@
 // https://www.youtube.com/watch?v=PzAHfUY6GGk&t=151s
 /**
- * @return {string}
+ * BF
  */
-function MinWindowSubstring(s, t) {
+
+/*function MinWindowSubstring(s, t) {
     let map = {};
     let final = s.slice(0);
     for (let i = 0; i < t.length; i++) {
@@ -31,48 +32,39 @@ function MinWindowSubstring(s, t) {
         }
     }
     return final;
-}
-
-/*function MinWindowSubstring(s, t) {
+}*/
+function MinWindowSubstring(s, t) {
     let minLength = Infinity;
-    let count = t.length;
-    let l = 0, r = 0;
-    let start = 0, end = 0;
+    let charCount = t.length;
     let map = {};
     for (let i = 0; i < t.length; i++) {
-        map[t[i]] = (map[t[i]] || 0) + 1;
+        let char = t.charAt(i);
+        map[char] = (map[char] || 0) + 1
     }
-    while (r<s.length) {
-        let charR = s.charAt(r);
-        if (map[charR] > 0) {
-            count--;
+    let start = 0, end = 0;
+    let l = 0, r = 0;
+    while (l < s.length && r < s.length) {
+        let char = s.charAt(r)
+        if (map[char] > 0) {
+            charCount--;
         }
-        map[charR] = map[charR] - 1;
-        r++
-        /!**
-         * if count is 0 then increase l
-         *!/
-        while (count === 0) {
-            /!**
-             * minlength
-             *!/
-            if ((r - l ) < minLength) {
-                minLength = r - l ;
-                start=l
-                end = r
-            }
+        map[char] = map[char] - 1;
+        r++;
+        while (charCount === 0) {
+            minLength = Math.min(minLength, r - l);
+            start = l;
+            end = r;
             let charL = s.charAt(l);
             map[charL] = map[charL] + 1;
             if (map[charL] > 0) {
-                count++;
+                charCount++;
             }
-            l++;
-
-
+            l++
         }
     }
-    return minLength === Infinity ? "":s.substr(start, minLength)
-}*/
+    return minLength === Infinity ? "" : s.slice(start, end);
+}
+
 // keep this function call here
 // console.log(MinWindowSubstring("krishnan", "ash"));//shna
 // console.log(MinWindowSubstring("ahffaksfajeeubsne", "jefaa"));//
