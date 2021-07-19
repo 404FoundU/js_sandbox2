@@ -58,3 +58,5 @@ const threeSum = (arr) => {
 }
 // console.log(threeSum([0,1,2,4]));
 console.log(threeSum([-1, 0, 1, 2, -1, -4]));
+
+// fourSum use i, j left right
