@@ -60,11 +60,10 @@ class DoublyLinkedList {
         }
         node.previous=null
         this.length--;
-
+return node;
     }
 
     moveToFront(key, value) {
-        let node = new Node(key, value);
         if (this.head === null) {
             this.insertAtHead(key, value);
             return;
