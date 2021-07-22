@@ -42,24 +42,25 @@ function MinWindowSubstring(s, t) {
         map[char] = (map[char] || 0) + 1
     }
     let start = 0, end = 0;
-    let l = 0, r = 0;
-    while (l < s.length && r < s.length) {
-        let char = s.charAt(r)
+    let windowStart = 0;
+    for (let windowEnd = 0; windowEnd < s.length; windowEnd++) {
+        let char = s.charAt(windowEnd)
         if (map[char] > 0) {
             charCount--;
         }
         map[char] = map[char] - 1;
-        r++;
         while (charCount === 0) {
-            minLength = Math.min(minLength, r - l);
-            start = l;
-            end = r;
-            let charL = s.charAt(l);
+            if (minLength > windowEnd - windowStart+1) {
+                minLength = windowEnd - windowStart+1;
+                start = windowStart;
+                end = windowEnd+1;
+            }
+            let charL = s.charAt(windowStart);
             map[charL] = map[charL] + 1;
             if (map[charL] > 0) {
                 charCount++;
             }
-            l++
+            windowStart++
         }
     }
     return minLength === Infinity ? "" : s.slice(start, end);
