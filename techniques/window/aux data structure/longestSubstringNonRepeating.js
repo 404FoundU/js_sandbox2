@@ -1,4 +1,5 @@
 //https://www.youtube.com/watch?v=1NzWlRP3yfI
+//https://leetcode.com/problems/longest-substring-without-repeating-characters/
 //brute force
 /*const longestSubstringNonRepeating = (s) => {
     let count = 0;
@@ -17,23 +18,31 @@
     }
     return count
 }*/
+
 const longestSubstringNonRepeating = (s) => {
-    let count = 0;
-    let l = 0, r = 0;
-    let set = new Set();
-    while (l < s.length && r < s.length) {
-        let char = s.charAt(r)
-        if (set.has(char)) {
-            set.delete(char);
-            l++;
+    let map = {};
+    let maxlength = 0;
+    let windowStart = 0;
+    let start = 0, end = 0
+    for (let windowEnd = 0; windowEnd < s.length; windowEnd++) {
+        let char = s.charAt(windowEnd);
+        map[char] = (map[char] || 0) + 1;
+        while (map[char] > 1) {
+            let leftChar = s.charAt(windowStart);
+            map[leftChar]--;
+            if (map[leftChar] === 0) {
+                delete map[leftChar];
+            }
+            windowStart++;
         }
-        else{
-            set.add(char);
-            r++;
-            count = Math.max(count, r - l);
+        if (maxlength < windowEnd - windowStart+1) {
+            maxlength = windowEnd - windowStart+1;
+            start = windowStart;
+            end = windowEnd+1;
         }
     }
-    return count;
+    return maxlength
 };
-const result = longestSubstringNonRepeating('abcabcbb');
+// const result = longestSubstringNonRepeating('abcabcbb');
+const result = longestSubstringNonRepeating("pwwkew");
 console.log(result);
