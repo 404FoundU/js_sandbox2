@@ -1,1 +1,12 @@
 https://www.youtube.com/watch?v=MK-NZ4hN7rs
+
+Recipe:
+
+TargetSum = 0
+CurrentSum = 0
+Windowstart = 0
+
+For( windowEnd = 0; windowEnd<arr.length; windowEnd++)
+    // do some calculation
+     If or while (target > currentSum)
+          WindowStart++
