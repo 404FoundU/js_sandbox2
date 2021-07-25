@@ -1,0 +1,17 @@
+https://www.youtube.com/watch?v=MK-NZ4hN7rs
+
+Recipe:
+
+TargetSum = 0
+CurrentSum = 0
+Windowstart = 0
+map = {}
+For( windowEnd = 0; windowEnd<arr.length; windowEnd++)
+    // find element
+    //add char to map
+    //window control
+     If  (target > currentSum) // for fixed window size
+       While (length < max) // for dynamic window size
+          WindowStart++
+
+// calculate max outside while

@@ -92,6 +92,35 @@ class BST {
         traverse(this.root);
         return data;
     }
+    //Navigate all the way to the bottom and get 2 bottom elements
+    DfsPostorder(){
+        const data = [];
+        const traverse = (node) => {
+            if (node.left !== null) {
+                traverse(node.left);
+            }
+            if (node.right !== null) {
+                traverse(node.right);
+            }
+            data.push(node);
+        };
+        traverse(this.root);
+        return data
+    }
+    DfsInorder(){
+        const data = [];
+        const traverse = (node) => {
+            if (node.left !== null) {
+                traverse(node.left);
+            }
+            data.push(node);
+            if (node.right !== null) {
+                traverse(node.right);
+            }
+        };
+        traverse(this.root);
+        return data
+    }
 }
 
 const bst = new BST();
