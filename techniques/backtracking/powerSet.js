@@ -4,15 +4,15 @@
 
 const powerSet = (s) => {
     const subset = []
-    dfs(s, subset, 0, []);
+    dfs(s, subset, 0, "");
     return subset;
 };
-const dfs = (s, subset, index, stack) => {
-    subset.push([...stack]);
+const dfs = (s, subset, index, path) => {
+    subset.push(path);
     for (let i = index; i < s.length; i++) {
-        stack.push(s[i]);
-        dfs(s,subset, i+1, stack)
-        stack.pop();
+        path += s[i]
+        dfs(s,subset, i+1, path)
+        path = path.slice(0,path.length-1);
     }
 }
 let result = powerSet([1,2,3]);
