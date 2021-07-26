@@ -2,7 +2,7 @@
 //https://www.youtube.com/watch?v=LdtQAYdYLcE
 
 
-const powerSet = (s) => {
+const allSubset = (s) => {
     const subset = []
     dfs(s, subset, 0, []);
     return subset;
@@ -15,5 +15,5 @@ const dfs = (s, subset, index, stack) => {
         stack.pop();
     }
 }
-let result = powerSet([1,2,3]);
+let result = allSubset([1,2,3]);
 console.log(result);
