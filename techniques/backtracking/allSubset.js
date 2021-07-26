@@ -18,12 +18,12 @@ const powerSet = (s) => {
     dfs(s, subset, 0, []);
     return subset;
 };
-const dfs = (s, subset, index, path) => {
-    subset.push([...path]);
+const dfs = (s, subset, index, stack) => {
+    subset.push([...stack]);
     for (let i = index; i < s.length; i++) {
-        path.push(s[i]);
-        dfs(s,subset, i+1, path)
-        path.pop();
+        stack.push(s[i]);
+        dfs(s,subset, i+1, stack)
+        stack.pop();
     }
 }
 let result = powerSet([1,2,3]);

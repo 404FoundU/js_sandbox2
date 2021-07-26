@@ -3,25 +3,27 @@
 const permutation = (s) => {
     const subset = []
     const path = []
-    const freq = [false,false,false];
-    dfs(s, path, subset, freq);
+    const visited = new Set();
+    dfs(s, path, subset, visited);
     return subset;
 };
-const dfs = (s, path, subset, freq) => {
-    if (path.length===s.length) {
-        subset.push([...path]);
+const dfs = (s, stack, subset, visited) => {
+    if (stack.length===s.length) {
+        subset.push([...stack]);
         return
     }
     for (let i = 0; i < s.length; i++) {
-        if (freq[i] === false) {
-            freq[i] = true;
-            path.push(s[i]);
-            dfs(s,path, subset, freq)
-            path.pop();
-            freq[i] = false;
+        let char = s[i];
+        if (!visited.has(char)) {
+            visited.add(char);
+            stack.push(char);
+            dfs(s,stack, subset, visited)
+            stack.pop();
+            visited.delete(char);
         }
 
     }
 }
-let result = permutation([1,2,3]);
+let result = permutation("uni");
+// let result = permutation([1,2,3]);
 console.log(result);
