@@ -1,1 +1,67 @@
 // find permutation of a string
+
+Use bfs or dfs
+
+//tree
+//bfs
+Result
+Queue
+while queue
+current = queue.shift()
+Result.push(current)
+current.left, current.right
+
+//dfsRecursive
+Result,
+traverse(current)
+result.push(current)
+traverse(left)
+traverse(right)
+
+traverse(root)
+
+//dfsIterator
+Result, stack,
+while stack
+current = stack.pop()
+result.push(current)
+stack.push(right)
+stack.push(left) // order for BST, no order for graph
+
+Graph
+//bfs
+visited = new Set()
+visited.add(start)
+queue= [start]
+while queue
+current = queue.shift()
+if current = end return;
+airports = adjcencyList[current]
+for airport in airports
+if !visited.has(airport)
+visited.add
+queue.push
+
+//dfsRecursive
+visited = new Set()
+visited.add(start)
+traverse(current) ->
+result.push(current)
+if current = end return
+airport = adjcencyList(current)
+for
+if !visited.has(airport)
+traverse(airport)
+
+//dfsIterator
+visited = new Set()
+visited.add(start)
+stack= [start]
+while stack
+current = stack.pop()
+if current = end return;
+airports = adjcencyList[current]
+for airport in airports
+if !visited.has(airport)
+visited.add
+stack.push
