@@ -101,9 +101,10 @@ class BST {
         }
         return result;
     }
-/*
-https://www.youtube.com/watch?v=TtAflDtqwVg
- */
+
+    /*
+    https://www.youtube.com/watch?v=TtAflDtqwVg
+     */
     maxDepthDFS() {
         let current = this.root;
         let depth = 0;
@@ -141,6 +142,28 @@ https://www.youtube.com/watch?v=TtAflDtqwVg
         }
         return depth;
     }
+
+    /*
+    https://www.youtube.com/watch?v=Hr5cWUld4vU
+     */
+    maxPathSum() {
+        let maxSum = this.root.val;
+
+        const dfs = (current) => {
+            if (current === null) {
+                return 0;
+            }
+               let leftMax = dfs(current.left);
+                leftMax = Math.max(leftMax, 0)
+              let  rightMax = dfs(current.right);
+                rightMax = Math.max(rightMax, 0)
+            //if negative nodes
+            maxSum = Math.max(maxSum, current.val + leftMax + rightMax);
+            return current.val + Math.max(leftMax, rightMax);
+        }
+        dfs(this.root);
+        return maxSum;
+    }
 }
 
 const bst = new BST();
@@ -161,6 +184,7 @@ bst.insert(20);*/
 // r = bst.DfsPreorderStack();
 // r=bst.maxDepthDFS()
 r = bst.maxDepthBFs()
+r = bst.maxPathSum()
 console.log(r);
 // bst.print();
 
