@@ -4,23 +4,22 @@ const letterCombinations = function (digits) {
         return [];
     }
     let map = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"];
-    let answer = [];
-    let path = "";
-    let index = 0;
-    dfs(digits, index, path, map, answer);
-    return answer;
+    let result = [];
+    const dfs = ( index, path) => {
+        if (index === digits.length) {
+            result.push(path);
+            return;
+        }
+        let current = map[digits[index]];
+        for (let i = 0; i < current.length; i++) {
+            path = path + current[i];
+            dfs( index + 1, path );
+            path = path.slice(0,path.length-1);
+        }
+    }
+    dfs(0, '');
+    return result;
 };
-const dfs = (digits, index, path, map, answer) => {
-    if (index === digits.length) {
-        answer.push(path);
-        return;
-    }
-    let current = map[digits[index]];
-    for (let i = 0; i < current.length; i++) {
-        path = path + current[i];
-        dfs(digits, index + 1, path, map, answer);
-        path = path.slice(0,path.length-1);
-    }
-}
+
 const result = letterCombinations('23');
 console.log(result);

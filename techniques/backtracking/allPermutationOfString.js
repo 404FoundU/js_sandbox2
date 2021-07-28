@@ -1,28 +1,27 @@
 //https://www.youtube.com/watch?v=YK78FU5Ffjw&t=903s
 
-const permutation = (s) => {
-    const subset = []
-    const path = []
-    const visited = new Set();
-    dfs(s, path, subset, visited);
-    return subset;
-};
-const dfs = (s, stack, subset, visited) => {
-    if (stack.length===s.length) {
-        subset.push([...stack]);
-        return
-    }
-    for (let i = 0; i < s.length; i++) {
-        let char = s[i];
-        if (!visited.has(char)) {
-            visited.add(char);
-            stack.push(char);
-            dfs(s,stack, subset, visited)
-            stack.pop();
-            visited.delete(char);
-        }
 
-    }
+const permutation = (s) => {
+    const result = [];
+    const visited = new Set();
+    const traverse = ( stack, callstack) => {
+        if (stack.length === s.length) {
+            result.push([...stack]);
+            return;
+        }
+        for (let i = 0; i < s.length; i++) {
+            if (!visited.has(s[i])) {
+                visited.add(s[i])
+                stack.push(s[i]);
+                traverse(stack, callstack+1)
+                stack.pop();
+                visited.delete(s[i])
+            }
+
+        }
+    };
+    traverse([], 0)
+    return result;
 }
 let result = permutation("uni");
 // let result = permutation([1,2,3]);
