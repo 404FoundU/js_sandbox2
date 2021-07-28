@@ -36,7 +36,6 @@ class BST {
         }
     }
 
-
     find(val) {
         if (this.root === null) {
             return this;
@@ -70,10 +69,11 @@ class BST {
         }
         return result;
     }
-    DFSPreOrder(){
+
+    DFSPreOrder() {
         let current = this.root;
         let result = []
-        const traverse =(current) => {
+        const traverse = (current) => {
             result.push(current.val);
             if (current.left !== null) {
                 traverse(current.left);
@@ -92,7 +92,6 @@ class BST {
         while (stack.length) {
             let current = stack.pop();
             result.push(current.val);
-
             if (current.right !== null) {
                 stack.push(current.right);
             }
@@ -101,6 +100,46 @@ class BST {
             }
         }
         return result;
+    }
+/*
+https://www.youtube.com/watch?v=TtAflDtqwVg
+ */
+    maxDepthDFS() {
+        let current = this.root;
+        let depth = 0;
+        const traverse = (current, level = 1) => {
+            if (depth < level) {
+                depth = level;
+            }
+            if (current.left !== null) {
+                traverse(current.left, level + 1);
+            }
+            if (current.right !== null) {
+                traverse(current.right, level + 1);
+            }
+        }
+        traverse(current);
+        return depth;
+    }
+
+    maxDepthBFs() {
+        let queue = [this.root];
+        let depth = 0;
+        while (queue.length) {
+            let currentLevelChildren = queue.length;
+            //loop until all children in the level is complete
+            for (let i = 0; i < currentLevelChildren; i++) {
+                let current = queue.shift();
+                if (current.left !== null) {
+                    queue.push(current.left);
+                }
+                if (current.right !== null) {
+                    queue.push(current.right);
+                }
+            }
+            depth++
+        }
+        return depth;
     }
 }
 
@@ -116,10 +155,12 @@ bst.insert(15);
 bst.insert(3);
 bst.insert(8);
 bst.insert(20);*/
-let r = bst.BFS();
+// let r = bst.BFS();
 // console.log(r);
-r=bst.DFSPreOrder();
-r = bst.DfsPreorderStack();
+// r=bst.DFSPreOrder();
+// r = bst.DfsPreorderStack();
+// r=bst.maxDepthDFS()
+r = bst.maxDepthBFs()
 console.log(r);
 // bst.print();
 
