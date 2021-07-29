@@ -1,1 +1,10 @@
+// reverse LL
+//https://www.youtube.com/watch?v=iRtLEoL-r-g
 next -> c.next -> prev -> c -> next
+
+//cycle in a linked LL
+slowPoiner = 0, fastPointer = 2
+fastPointer = fastPointer+2
+slowPoiner = slowPoiner + 1
+if cycle then slowPoiner = fastPointer
+if fastpointer = null; // no cycle
