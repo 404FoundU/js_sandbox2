@@ -13,19 +13,20 @@ let note = {
     content: ''
 }
 const addNewNote = () => {
-    console.log('adding new note')
     const noteTitle = document.getElementById("note-title").value;
     const noteContent = document.getElementById("note-content").value;
     if (validateInput(noteTitle, noteContent)) {
-        const notes = getDataFromStorage();
+        let notes = [];
+        notes = getDataFromStorage();
         if (notes.length) {
-            let lastNote = notes.pop();
+            let lastNote = notes[notes.length - 1];
             noteId = lastNote.noteId + 1;
         }
+        console.log(noteId);
         note.title = noteTitle;
         note.content = noteContent;
-        note.id = noteId;
-        notes.push(note);
+        note.noteId = noteId;
+        notes.push({...note});
         console.log(notes);
         createNote(note);
         // saving in the local storage
