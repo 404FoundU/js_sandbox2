@@ -1,83 +1,56 @@
-console.log("hi")
 const noteListDiv = document.querySelector(".note-list");
-let noteID = 1;
-function Note(id, title, content){
-    this.id = id;
-    this.title = title;
-    this.content = content;
-}
-
-// Add eventListeners
-
-function eventListeners(){
-    document.addEventListener("DOMContentLoaded", displayNotes);
-    document.getElementById("add-note-btn").addEventListener("click", addNewNote);
-
-    noteListDiv.addEventListener("click", deleteNote);
-
-    document.getElementById("delete-all-btn").addEventListener("click", deleteAllNotes);
-
-}
-
-
-eventListeners();
-
 
 // get item from storage
-
-function getDataFromStorage(){
+function getDataFromStorage() {
     return localStorage.getItem("notes") ? JSON.parse(localStorage.getItem("notes")) : [];
 }
 
-
-
 // add a new note in the list
-
-function addNewNote(){
-    const noteTitle = document.getElementById("note-title");
-    const noteContent = document.getElementById("note-content");
-
-    if(validateInput(noteTitle, noteContent)){
-        let notes = getDataFromStorage();
-
-        let noteItem = new Note(noteID, noteTitle.value, noteContent.value);
-        noteID++;
-        notes.push(noteItem);
-        createNote(noteItem);
-
+let noteId = 1
+let note = {
+    noteId: noteId,
+    title: '',
+    content: ''
+}
+const addNewNote = () => {
+    console.log('adding new note')
+    const noteTitle = document.getElementById("note-title").value;
+    const noteContent = document.getElementById("note-content").value;
+    if (validateInput(noteTitle, noteContent)) {
+        const notes = getDataFromStorage();
+        if (notes.length) {
+            let lastNote = notes.pop();
+            noteId = lastNote.noteId + 1;
+        }
+        note.title = noteTitle;
+        note.content = noteContent;
+        note.id = noteId;
+        notes.push(note);
+        console.log(notes);
+        createNote(note);
         // saving in the local storage
-
         localStorage.setItem("notes", JSON.stringify(notes));
         noteTitle.value = "";
         noteContent.value = "";
-
-
     }
-
 }
 
-
-
 //  input validation
-
-function validateInput(title, content){
-    if(title.value !== "" && content.value !== ""){
+function validateInput(title, content) {
+    if (title.value !== "" && content.value !== "") {
         return true;
-    }else {
-        if(title.value === "") title.classList.add("warning");
-        if(content.value === "") content.classList.add("warning");
+    } else {
+        if (title.value === "") title.classList.add("warning");
+        if (content.value === "") content.classList.add("warning");
     }
     setTimeout(() => {
         title.classList.remove("warning");
         content.classList.remove("warning");
-
     }, 1600);
 }
 
-
 // create a new note div
-
-function createNote(noteItem){
+function createNote(noteItem) {
     const div = document.createElement("div");
     div.classList.add("note-item");
     div.setAttribute("data-id", noteItem.id);
@@ -88,28 +61,29 @@ function createNote(noteItem){
         <span><i class = "fas fa-trash"></i></span>
         Delete
         </buttton>
+        <button type = "button" class = "btn edit-note-btn">
+        <span><i class = "fas fa-trash"></i></span>
+        Edit
+        </buttton>
   `;
     noteListDiv.appendChild(div);
 }
 
-
 // display all the notes from the local storage
-
 function displayNotes(){
     let notes = getDataFromStorage();
     if(notes.length > 0) {
-        noteID = notes[notes.length - 1].id;
-        noteID++;
+        noteId = notes[notes.length - 1].id;
+        noteId++;
     }else {
-        noteID = 1;
+        noteId = 1;
     }
     notes.forEach(item => {
         createNote(item);
     });
 }
-
-
 // delete a note
+/*
 function deleteNote(e){
     if (e.target.classList.contains("delete-note-btn")) {
 
@@ -122,9 +96,9 @@ function deleteNote(e){
         localStorage.setItem("notes", JSON.stringify(newNotesList));
     }
 }
-
-
+*/
 // delete all notes
+/*
 function deleteAllNotes(){
     localStorage.removeItem("notes");
     let noteList = document.querySelectorAll(".note-item");
@@ -133,5 +107,11 @@ function deleteAllNotes(){
             noteListDiv.removeChild(item);
         });
     }
-    noteID = 1 //resetting noteID to 1
-}
+    noteId = 1 //resetting noteId to 1
+}*/
+// Add eventListeners
+// document.addEventListener("DOMContentLoaded", displayNotes);
+document.getElementById("add-note-btn").addEventListener("click", addNewNote);
+// noteListDiv.addEventListener("click", deleteNote);
+// document.getElementById("delete-all-btn").addEventListener("click", deleteAllNotes);
+
