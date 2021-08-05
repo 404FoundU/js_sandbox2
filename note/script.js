@@ -54,7 +54,7 @@ function validateInput(title, content) {
 function createNote(noteItem) {
     const div = document.createElement("div");
     div.classList.add("note-item");
-    div.setAttribute("data-id", noteItem.id);
+    div.setAttribute("data-id", noteItem.noteId);
     div.innerHTML = `
         <h3>${noteItem.title}</h3>
         <p>${noteItem.content}</p>
@@ -84,20 +84,22 @@ function displayNotes(){
     });
 }
 // delete a note
-/*
 function deleteNote(e){
     if (e.target.classList.contains("delete-note-btn")) {
 
         e.target.parentElement.remove();
-        let divID = e.target.parentElement.dataset.id;
+        let id = parseInt(e.target.parentElement.dataset.id)
         let notes = getDataFromStorage();
-        let newNotesList = notes.filter(item => {
-            return item.id !== parseInt(divID);
+        let newNotes = notes.filter(item => {
+            let temp = item.noteId;
+            let temp2 = id
+            return item.noteId !== id;
         });
-        localStorage.setItem("notes", JSON.stringify(newNotesList));
+
+        // localStorage.clear();
+        localStorage.setItem("notes", JSON.stringify(newNotes));
     }
 }
-*/
 // delete all notes
 /*
 function deleteAllNotes(){
@@ -111,8 +113,8 @@ function deleteAllNotes(){
     noteId = 1 //resetting noteId to 1
 }*/
 // Add eventListeners
-// document.addEventListener("DOMContentLoaded", displayNotes);
+document.addEventListener("DOMContentLoaded", displayNotes);
 document.getElementById("add-note-btn").addEventListener("click", addNewNote);
-// noteListDiv.addEventListener("click", deleteNote);
+noteListDiv.addEventListener("click", deleteNote);
 // document.getElementById("delete-all-btn").addEventListener("click", deleteAllNotes);
 
