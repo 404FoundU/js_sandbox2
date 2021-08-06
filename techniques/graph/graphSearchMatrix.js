@@ -1,8 +1,14 @@
 //https://www.youtube.com/watch?v=q1tWucRHxj0
 // graph picture is in video
-const airports = 'PHX BKK OKC JFK LAX MEX EZE'.split(' ');
-
+/*
+             LAX
+       PHX           DAL
+IND          USA   Sin       Pak
+*/
+//BFS - 12345678
+const airports = ['LAX', 'PHX', 'DAL', 'IND', 'USA', 'Sin','Pak']
 const adjMatrix = [
+
     [0, 1, 1, 0, 0, 0, 0],
     [0, 0, 0, 1, 1, 0, 0],
     [0, 0, 0, 0, 0, 1, 1],
@@ -11,18 +17,25 @@ const adjMatrix = [
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
 ]
-const bfs = (adjMatrix, start) => {
-    const queue = [start];
+const bfs = (start, end) => {
+    let indexStart = airports.indexOf(start);
+    let indexEnd = airports.indexOf(end)
+    //start is LAX. It is the 0th row and 0th column.
+    // Here we consider row as 0;
+    const queue = [indexStart];
     const visited = new Set();
-    visited.add(start);
+    visited.add(indexStart);
+    const result = [];
     while (queue.length) {
         let current = queue.shift();
         console.log(current);
+        result.push(current);
         let destinations = adjMatrix[current];
         for (let i = 0; i < destinations.length; i++) {
             //find OKC airport
-            if (destinations[i] === 1 && i===2) {
-                console.log("Found it");
+            if (destinations[i] === 1 && i===indexEnd) {
+                result.push(indexEnd);
+                return result;
             }
             if (!visited.has(i) && destinations[i] === 1 ) {
                 visited.add(i);
@@ -30,8 +43,9 @@ const bfs = (adjMatrix, start) => {
             }
         }
     }
+    return result
 }
-// bfs(adjMatrix, 0);
+// bfs('LAX', 'PAK');
 const dfs = (start) => {
     const stack = [start];
     const visited = new Set();
