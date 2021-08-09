@@ -27,14 +27,16 @@ const matrixPath = (strArr) => {
 
             if (row >= 0 && column >= 0 && row < m && column < n) {
                 if (grid[row][column] === "1") {
-                    queue.push([row, column, changed]);
                     visited.push(key);
                     grid[row][column] = "0";
+                    queue.push([row, column, changed]);
+
                 }
                 if (grid[row][column] === "0" && !(visited.includes(key)) && changed<2) {
-                    queue.push([row, column, changed+1]);
                     visited.push(key);
                     grid[row][column] = "1";
+                    queue.push([row, column, changed+1]);
+
 
                 }
             }
@@ -42,5 +44,5 @@ const matrixPath = (strArr) => {
     }
     return 'not possible';
 };
-// console.log(matrixPath(["11100", "10011", "10101", "10011"]));;
-console.log(matrixPath(["10000", "11011", "10101", "11001"]));;
+console.log(matrixPath(["11100", "10011", "10101", "10011"]));;
+// console.log(matrixPath(["10000", "11011", "10101", "11001"]));;
