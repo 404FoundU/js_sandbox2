@@ -24,13 +24,16 @@ const courseSchedule = (numCourses, prerequisites) => {
             queue.push(i);
         }
     }
-    let count = 0;
+    let result = [];
     while (queue.length) {
         const course = queue.shift();
-        count++;
+        result.push(course);
         let courses = adjacencyList[course.toString()];
         if (courses !== undefined) {
             for (let c of courses) {
+                if (result.includes(c)) {
+                    return []
+                }
                 indegree[c]--;
                 if (indegree[c] === 0) {
                     queue.push(c);
@@ -39,10 +42,11 @@ const courseSchedule = (numCourses, prerequisites) => {
         }
 
     }
-    return count===numCourses;
+    return result.length===numCourses?result:[];
 }
 let r;
-r = courseSchedule(3, [[1, 0], [2,1]]);
+r = courseSchedule(3, [[1,0],[1,2],[0,1]]);
+// r = courseSchedule(3, [[1, 0], [2,1]]);
 // r = courseSchedule(2, [[1, 0]]);
 // r = courseSchedule(2, [[1, 0], [0, 1]]);
 console.log(r);
