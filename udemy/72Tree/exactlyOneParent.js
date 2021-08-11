@@ -25,6 +25,7 @@ const parentChildFinder = (parentChild) => {
 
         childMap.get(child).push(parent);
     }
+    console.log(childMap);
     for (let [key, value] of childMap) {
         if (value.length === 0) {
             noParent.push(key);
