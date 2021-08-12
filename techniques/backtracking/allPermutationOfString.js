@@ -3,25 +3,33 @@
 const permutation = (s) => {
     const result = [];
     const visited = new Set();
-    const traverse = ( stack) => {
-        if (stack.length === s.length) {
-            result.push([...stack]);
-            return;
+    const traverse = (stack) => {
+
+        let st = [...stack];
+        if (st.length===s.length) {
+            result.push(st);
         }
         for (let i = 0; i < s.length; i++) {
-            if (!visited.has(s[i])) {
-                visited.add(s[i])
-                stack.push(s[i]);
-                traverse(stack)
+            let character = s[i];
+
+            if (!visited.has(character)) {
+                visited.add(character)
+                stack.push(character);
+                traverse(stack);
                 stack.pop();
-                visited.delete(s[i])
+                visited.delete(character)
             }
 
         }
     };
+
     traverse([])
     return result;
 }
+
+let result = permutation("uni");
+// let result = permutation([1,2,3]);
+console.log(result);
 /*const permutation = (s) => {
     const result = [];
     const visited = new Set();
