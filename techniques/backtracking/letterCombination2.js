@@ -3,21 +3,26 @@ const letterCombinations = function (digits) {
     if (digits.length === 0) {
         return [];
     }
+    const result = [];
     let map = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"];
-    let result = [];
-    const dfs = ( index, path) => {
-        if (index === digits.length) {
-            result.push(path);
-            return;
+    const traverse = (currentIndex,stack) => {
+        if (stack.length === digits.length) {
+            let st = [...stack];
+            result.push(st);
+            return
         }
-        let current = map[digits[index]];
-        for (let i = 0; i < current.length; i++) {
-            path = path + current[i];
-            dfs( index + 1, path );
-            path = path.slice(0,path.length-1);
+        let digit = digits[currentIndex];
+        let str = map[parseInt(digit)];
+        for (let i = 0; i < str.length; i++) {
+            //stack push
+            stack = stack + str[i];
+            traverse(currentIndex + 1, stack);
+            //stack pop
+            stack = stack.slice(0, stack.length - 1);
         }
+
     }
-    dfs(0, '');
+    traverse(0, "");
     return result;
 };
 
