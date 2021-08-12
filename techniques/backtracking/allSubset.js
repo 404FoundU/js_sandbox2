@@ -22,17 +22,20 @@
 }*/
 const allSubset = (s) =>{
     const result = [];
-    const traverse = (index, stack) => {
-        //clone
-        result.push([...stack]);
-        for (let i = index; i < s.length; i++) {
-            stack.push(s[i])
-            traverse(i+1, stack)
-            stack.pop();
+    const traverse = (current, stack)=> {
+        let st=[...stack]
+        result.push(st);
+        for (let i = current; i < s.length; i++) {
+            let char = s[i];
+            stack.push(char);
+            traverse(i + 1, stack);
+            stack.pop()
         }
+
     }
-    traverse(0, []);
-    return result
+    traverse(0, [])
+    return result;
+
 }
-    let result = allSubset([1,2,3]);
+let result = allSubset([1,2,3]);
 console.log(result);
