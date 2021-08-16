@@ -17,9 +17,10 @@ const wordSearch = (word) => {
     const final = [];
     //i = current character in target
     const traverse = (r, c, i, stack) => {
+        let st = [...stack];
+        final.push(st);
         if (i === word.length) {
-            let st = [...stack];
-            final.push(st);
+
             return true;
         }
         if (r < 0 || r >= rows || c < 0 || c >= column ||
