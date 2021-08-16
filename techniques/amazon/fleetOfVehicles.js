@@ -1,4 +1,3 @@
-//https://leetcode.com/discuss/interview-question/1365052/Amazon-OA
 const fleetOfVehicles = (arr) => {
     let result = [];
     for (let el of arr) {
