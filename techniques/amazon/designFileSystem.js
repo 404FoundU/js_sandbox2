@@ -22,13 +22,18 @@ const designFileSystem = (method, value) => {
 const pathMap = {};
 const createPath = (path, value) => {
 
-    if (path.length === 0 || path === '/') {
+    if (path.length === 0 || path === '/' || value===undefined) {
         return false;
     }
+
     const paths = path.slice(1).split('/');
     if (paths.length === 1) {
-        pathMap[paths[0]] = value;
-        return true
+        if (pathMap[paths[0]] === undefined) {
+            pathMap[paths[0]] = value;
+            return true
+        }
+        return false;
+
     } else {
         for (let j = 1; j < paths.length; j++) {
             let key = paths.slice(0, j + 1).join(',');
@@ -41,13 +46,16 @@ const createPath = (path, value) => {
                     pathMap[key] = -1;
                     return false
                 } else {
-                    pathMap[key] = value;
-                    return true
+
+                        pathMap[key] = value;
+                        return true
+
+
                 }
             }
         }
     }
-    return value;
+    return false;
 }
 const getPath = (path) => {
     const paths = path.slice(1).split('/');
@@ -60,5 +68,9 @@ const getPath = (path) => {
 }
 // let a = [["FileSystem","createPath","get"],    [[],["/a",1],["/a"]]];
 // console.log(designFileSystem(["FileSystem","createPath","get"],    [[],["/a",1],["/a"]]));
-console.log(designFileSystem(["FileSystem", "createPath", "createPath", "get", "createPath", "get"],
-    [[], ["/leet", 1], ["/leet/code", 2], ["/leet/code"], ["/c/d", 1], ["/c"]]));
+// console.log(designFileSystem(["FileSystem", "createPath", "createPath", "get", "createPath", "get"],    [[], ["/leet", 1], ["/leet/code", 2], ["/leet/code"], ["/c/d", 1], ["/c"]]));
+console.log(designFileSystem(["FileSystem","createPath","createPath","get","createPath","get"],    [[],["/leet",1],["/leet/code",2],["/leet/code"],["/leet/code",3],["/leet/code"]]));
+
+
+["FileSystem","createPath","createPath","get","createPath","get"]
+    [[],["/leet",1],["/leet/code",2],["/leet/code"],["/leet/code",3],["/leet/code"]]
