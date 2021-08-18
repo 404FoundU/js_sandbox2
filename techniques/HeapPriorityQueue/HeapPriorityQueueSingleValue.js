@@ -4,7 +4,7 @@ class Node {
     }
 }
 
-class PriorityQueue {
+export default class PriorityQueue {
     constructor() {
         this.values = [];
     }
@@ -21,6 +21,10 @@ class PriorityQueue {
         return idx * 2 + 2;
     }
 
+    size() {
+        return this.values.length
+    }
+
     enqueue(val) {
         let node = new Node(val)
         this.values.push(node);
@@ -35,8 +39,11 @@ class PriorityQueue {
             max = this.values[0];
             //pop last element and add to front
             let last = this.values.pop()
-            this.values[0] = last;
-            this.sinkdown();
+            if (this.values.length > 0){
+                this.values[0] = last;
+                this.sinkdown();
+            }
+
         }
         return max;
     }
@@ -86,7 +93,7 @@ class PriorityQueue {
     }
 }
 
-let pQ = new PriorityQueue();
+/*let pQ = new PriorityQueue();
 pQ.enqueue(39);
 pQ.enqueue(18);
 pQ.enqueue(55);
@@ -96,5 +103,5 @@ pQ.enqueue(33);
 pQ.enqueue(27);
 pQ.enqueue(38);
 pQ.extractMax();
-console.log(pQ.values);
+console.log(pQ.values);*/
 
