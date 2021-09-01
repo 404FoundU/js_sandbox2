@@ -1,28 +1,28 @@
 //https://leetcode.com/problems/find-all-anagrams-in-a-string/
 
 const allAnagrams = (s, p) =>{
-    let pMapCopy = {};
+    let map = {};
     for (let i = 0; i < p.length; i++) {
         let char = p.charAt(i)
-        pMapCopy[char] = (pMapCopy[char] || 0) + 1;
+        map[char] = (map[char] || 0) + 1;
     }
     let charCount = p.length
     let result = [];
     let windowStart = 0
     for (let windowEnd = 0; windowEnd < s.length; windowEnd++) {
         let char = s.charAt(windowEnd);
-        if (pMapCopy[char] !== undefined && pMapCopy[char] >0) {
+        if (map[char] !== undefined && map[char] >0) {
             charCount--;
         }
-        pMapCopy[char]--;
+        map[char]--;
 
         while (charCount === 0 ) {
             if (windowEnd - windowStart + 1 === p.length) {
                 result.push(windowStart);
             }
             let charL = s.charAt(windowStart);
-            pMapCopy[charL]++;
-            if (pMapCopy[charL] > 0) {
+            map[charL]++;
+            if (map[charL] > 0) {
                 charCount++;
             }
             windowStart++;

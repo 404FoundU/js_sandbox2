@@ -3,7 +3,6 @@
 const longestSubstringKDistinctChar = (s, k) => {
     let map = {};
     let maxlength = 0;
-    let currentLength = 0;
     let windowStart = 0;
     let start = 0, end = 0
     for (let windowEnd = 0; windowEnd < s.length; windowEnd++) {

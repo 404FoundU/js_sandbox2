@@ -1,4 +1,5 @@
 //https://www.youtube.com/watch?v=3N47yKRDed0
+//https://leetcode.com/problems/partition-equal-subset-sum/submissions/
 
 const partitionEqualSubsetSum = (arr)=>{
     let leftSum =0;
